@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Clientes del Gimansio
+{% endblock %}
+
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li a {
+        display: block;
+        width: 60px;
+        background-color: #dddddd;
+    }
+</style>
+
+{% block content %}
+
+    <title>Clientes del Gimansio</title>
+    <h1><center>Bienvenido al sistema de administracion de Clientes</center></h1>
+
+    <form action="/clients/add-client">
+        <input type="submit" value="Agregar Cliente" />
+    </form>
+
+    <form action="/clients/list-clients">
+        <input type="submit" value="Listar Clientes" />
+    </form>
+
+    {% if form %}
+        <form action="" method="POST">
+
+            {% csrf_token %}
+
+            <table>
+                {{form.as_table}}
+            </table>
+
+
+
+            <input class="button" type="submit" value="Añadir Cliente" class="btn-info">
+        </form>
+    {% endif %}
+
+
+    {% if form_errors %}
+        <h2 style="color: red;" >Errores:</h2>
+        {{form_errors}}
+    {% endif %}
+
+
+    {% if message %}
+        <h2 style="color: green;" >{{message}}</h2>
+    {% endif %}
+
+{% endblock %}

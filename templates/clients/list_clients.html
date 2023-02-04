@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listado de Clientes
+{% endblock %}
+
+{% block content %}
+
+    <h1><u>Listado de Clientes</u></h1>
+    <br>
+    <br>
+    <form action="/clients/add-client">
+        <input type="submit" value="Agregar Cliente" />
+    </form>
+    <br>
+    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
+    -->{% for client in clients %}
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://cdn-icons-png.flaticon.com/512/55/55314.png" class="card-img-top" alt="imagen de cliente" height="200">
+            <div class="card-body">
+            <h5 class="card-title">{{client.first_name}} {{client.last_name}}</h5>
+            <p class="card-text">Fecha de Nacimiento: <b>{{client.birth_date}}</b></p>
+            <a href="/clients/update-client/{{client.id}}/" class="btn btn-primary">Actualizar</a>
+            <!-- <a href="/clients/provider-delete/{{provider.id}}/" class="btn btn-danger">Borrar</a> -->
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Agregar Nuevo Cliente
+{% endblock %}
+
+{% block content %}
+    <title>Agregar Nuevo Cliente</title>
+    <h1><center>Bienvenido</center></h1>
+    <h3>Por favor ingrese los datos para agregar un nuevo cliente al sistema</h3>
+
+    {% if form %}
+
+        <form action="" method="POST">
+
+            {% csrf_token %}
+
+            <table>
+                {{form.as_table}}
+            </table>
+
+
+            <input class="button" type="submit" value="Añadir Cliente" class="btn-info">
+        </form>
+    {% endif %}
+
+
+    {% if form_errors %}
+        <h2 style="color: red;" >Errores:</h2>
+        {{form_errors}}
+    {% endif %}
+
+
+    {% if message %}
+        <h2 style="color: green;" >{{message}}</h2>
+    {% endif %}
+
+{% endblock %}

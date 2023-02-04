@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listado de Profesores
+{% endblock %}
+
+{% block content %}
+
+    <h1><u>Listado de Profesores</u></h1>
+    <br>
+    <br>
+    <form action="/trainers/add-trainer/">
+        <input type="submit" value="Agregar Profesores" />
+    </form>
+    <br>
+    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
+    -->{% for trainer in trainers %}
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de profesor" class="card-img-top" height="200">
+            <div class="card-body">
+            <h5 class="card-title">{{trainer.name}} {{trainer.last_name}}</h5>
+            {% if trainer.free == True %}
+                <p>Este profesor esta libre para dar clases</p>
+            {% else %}
+                <p>Actualmente, este profesor esta dando clases</p>
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

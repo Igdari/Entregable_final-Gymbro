@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listado de Planes
+{% endblock %}
+
+{% block content %}
+
+    <h1><u>Listado de Planes</u></h1>
+    <br>
+    <br>
+    <form action="/plans/add-plan/">
+        <input type="submit" value="Agregar Planes" />
+    </form>
+    <br>
+    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
+    -->{% for plan in plans %}
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de planes" class="card-img-top" height="200">
+            <div class="card-body">
+            <h5 class="card-title">{{plan.name}}</h5>
+            <p class="card-text">${{plan.cost}}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
