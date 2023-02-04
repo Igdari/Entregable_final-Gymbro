@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.views.generic import DeleteView
 from django.http import HttpResponse
 from plans.models import Plans
 from plans.forms import PlanForm
@@ -15,8 +17,9 @@ def add_plan(request):
         form = PlanForm(request.POST)
         if form.is_valid():
             Plans.objects.create(
-                name=form.cleaned_data['Nombre'],
-                cost=form.cleaned_data['Costo'],
+                name=form.cleaned_data['name'],
+                detail=form.cleaned_data['detail'],
+                cost=form.cleaned_data['cost'],
             )
             context = {
                 'message': 'Plan añadido Correctamente'
@@ -39,3 +42,45 @@ def list_plans(request):
         'plans':plans,
     }
     return render(request, 'plans/list_plans.html', context=context)
+
+
+@login_required
+def update_plan(request, pk):
+    plan = Plans.objects.get(id=pk)
+    
+    if request.method == 'GET':
+        form = PlanForm(initial = {
+            'name':plan.name,
+            'detail':plan.detail,
+            'cost':plan.cost,
+        })
+        context ={
+            'form':form
+        }
+        return render(request, 'plans/update_plan.html', context=context)
+
+    elif request.method == 'POST':
+        form = PlanForm(request.POST)
+        if form.is_valid():
+            plan.name = form.cleaned_data['name']
+            plan.detail = form.cleaned_data['detail']
+            plan.cost = form.cleaned_data['cost']
+            plan.save()
+
+            context = {
+                'message': 'Plan actualizado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': PlanForm()
+            }
+        return render(request, 'plans/update_plan.html', context=context)
+
+# class ProviderUpdateView(UpdateView)
+# def provider_delete(request, pk):     //provider.delete()
+
+class PlanDeleteView(DeleteView):
+    model = Plans
+    template_name = 'plans/delete_plan.html'
+    success_url = '/plans/list-plan/'

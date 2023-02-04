@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% block search %}
+<form class="form-inline my-2 my-lg-0" action="/trainers/list-trainers/" method="GET">
+    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Profesores" aria-label="Search" name="search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock %}
+
 {% block title %}
     Listado de Profesores
 {% endblock %}
@@ -26,6 +33,8 @@
             {% else %}
                 <p>Actualmente, este profesor esta dando clases</p>
             {% endif %}
+            <a href="/trainers/update-trainer/{{trainer.pk}}/" class="btn btn-primary">Actualizar</a>
+            <a href="/trainers/delete-trainer/{{trainer.pk}}/" class="btn btn-danger">Borrar</a>
             </div>
         </div>
     {% endfor %}

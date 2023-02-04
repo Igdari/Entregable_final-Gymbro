@@ -1,5 +1,7 @@
 from django import forms
 
+
+
 CONDITION_CHOICES = (
         ('Funcional', 'Funcional'),
         ('Spinning', 'Spinning'),
@@ -13,4 +15,3 @@ class TrainerForm(forms.Form):
     phone_number = forms.CharField(max_length=20, required=False, label='N° de Telefono')
     email = forms.EmailField(required=False, label='Correo Electrónico')
     teaches = forms.ChoiceField(required=True, choices = CONDITION_CHOICES, label='Enseña')
-    is_free = forms.BooleanField(required=False, label='Esta diponible')

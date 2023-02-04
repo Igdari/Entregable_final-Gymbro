@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% block search %}
+<form class="form-inline my-2 my-lg-0" action="/clients/list-clients/" method="GET">
+    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Cliente" aria-label="Search" name="search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock %}
+
 {% block title %}
     Listado de Clientes
 {% endblock %}
@@ -22,8 +29,8 @@
             <div class="card-body">
             <h5 class="card-title">{{client.first_name}} {{client.last_name}}</h5>
             <p class="card-text">Fecha de Nacimiento: <b>{{client.birth_date}}</b></p>
-            <a href="/clients/update-client/{{client.id}}/" class="btn btn-primary">Actualizar</a>
-            <!-- <a href="/clients/provider-delete/{{provider.id}}/" class="btn btn-danger">Borrar</a> -->
+            <a href="/clients/update-client/{{client.pk}}/" class="btn btn-primary">Actualizar</a>
+            <a href="/clients/delete-client/{{client.pk}}/" class="btn btn-danger">Borrar</a>
             </div>
         </div>
     {% endfor %}
