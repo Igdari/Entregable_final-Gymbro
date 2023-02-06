@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block content %}
+    <center><u><h1>Conoce un poco sobre nosotros</h1></u></center>
+    <div class="card" style="background-color: rgba(189, 179, 179, 0.404)">
+        <h1>Somos GymBro</h1>
+        <h2>Ayudando a mantenerte sano y feliz para una mejor calidad de vida.</h2>
+    </div>
+    <br><br>
+    <div class="card" style="background-color: rgba(189, 179, 179, 0.404)">
+        <h1>Nuestra Historia</h1>
+        <h2>GymBro se creó cuando varios profesionales de la salud y el entrenamiento<br>
+            desidieron unificarse en un solo lugar para darle muchas posibilidades a nuestros clientes.<br>
+            Desde entonces hemos trabajado juntos como una familia.
+        </h2>
+    </div>
+    <br><br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card" style="width: 21rem; float: center;">
+                <div class="card-body">
+                    <h5 class="card-title">Creador del Sitio</h5>
+                    <img src="/media/images/profile_pic_about_us.jpg" 
+                        alt="imagen del Desarrollador" 
+                        width="300" 
+                        height="300" >
+                    <p class="card-text">Ignacio Iarlori fue el único trabajando en este sitio.<br>
+                    Con los conocimientos adquiridos en el Curso de Python en Coder House<br>
+                    Ignacio desarrollo este proyecto de administracion de clientes, profesores y planes de entrenamiento<br>
+                    para un Gimnasio 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

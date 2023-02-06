@@ -53,6 +53,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/plans/list-plans/">Planes de Pago</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about-us/">Acerca de Nosotros</a>
+                        </li>
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="/users/logout/">Logout</a>
@@ -68,7 +71,7 @@
                                 <a class="nav-link" href="/users/login/">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/users/signup/">Signup</a>
+                                <a class="nav-link" href="/users/signup/">Registrarse</a>
                             </li>
                         {% endif %}
                     </ul>

@@ -15,7 +15,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from gym.views import index
+from gym.views import index, about_us
 from django.conf.urls.static import static
 
 from gym.settings import MEDIA_ROOT, MEDIA_URL
@@ -23,6 +23,7 @@ from gym.settings import MEDIA_ROOT, MEDIA_URL
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('about-us/', about_us, name="about_us"),
 
     path('clients/', include('clients.urls')),
     path('trainers/', include('trainers.urls')),

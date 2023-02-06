@@ -22,15 +22,11 @@
     <br>
     {% for trainer in trainers %}
         <center>
-            <div class="card" style="width: 10rem; float: left;">
-                <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de profesor" class="card-img-top" height="130">
+            <div class="card" style="width: 12rem; float: left;">
+                <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de profesor" class="card-img-top" height="150">
                 <div class="card-body">
-                <h5 class="card-title">{{trainer.name}} {{trainer.last_name}}</h5>
-                {% if trainer.free == True %}
-                    <p>Este profesor esta libre para dar clases</p>
-                {% else %}
-                    <p>Actualmente, este profesor esta dando clases</p>
-                {% endif %}
+                <h5 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h5>
+                <h5 class="card-title">Este Profesor/ra enseña:<b> {{trainer.teaches}}</b></h5>
                 <a href="/trainers/update-trainer/{{trainer.pk}}/" id="button" class="btn btn-primary"">Detalle</a>
                 <a href="/trainers/delete-trainer/{{trainer.pk}}/" id="button" class="btn btn-danger">Borrar</a>
                 </div>
