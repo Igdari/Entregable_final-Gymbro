@@ -28,3 +28,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone', 'birth_date', 'profile_picture']
+
+class WelcomePageForm(forms.ModelForm):
+    welcome_picture = forms.ImageField(label='Imagen de Bienvenida')

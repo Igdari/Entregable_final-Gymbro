@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
 
-from users.models import UserProfile
+from users.models import UserProfile, WelcomePage
 from users.forms import RegisterForm, UserUpdateForm, UserProfileForm
 
 def login_view(request):
@@ -115,3 +115,12 @@ def update_user_profile(request):
             'form':UserProfileForm()
         }
         return render(request, 'users/register.html', context=context)
+
+def welcome_image(request):
+    
+    welcome_picture = WelcomePage.objects.all()
+    
+    context = {
+        'welcome_picture':welcome_picture,
+    }
+    return render(request, 'index.html', context=context)

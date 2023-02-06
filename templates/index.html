@@ -5,15 +5,25 @@
 {% endblock %}
 
 {% block content %}
-    <h1><center>Bienvenido a Nuestro centro de Entrenamiento</center></h1>
-    {% if request.user.is_authenticated %}
-        {% if message %}
-        <br><br>
-            <center><h2>{{message}}</h2></center>
-        {% endif %}
-    {% else %}
-        <br><br><br>
-        <h5><center>Aún no esta logueado. Por favor Ingrese para conocer nuestros Planes!!</center></h5>
+<center>
+    <h1>Bienvenido a <u><b>GymBro</b></u></h1>
+    {% for wel in welcome %}
+        <h1>{{wel.welcome_greetings}}</h1>
+        <img src="{{wel.welcome_picture.url}}" 
+        alt="Bienvenido" 
+        width="500" 
+        height="400">
+    {% endfor %}
+</center>
+    
+{% if request.user.is_authenticated %}
+    {% if message %}
+    <br><br>
+        <center><h2>{{message}}</h2></center>
     {% endif %}
+{% else %}
+    <br><br><br>
+    <h5><center>Aún no esta logueado. Por favor Ingrese para conocer nuestros Planes!!</center></h5>
+{% endif %}
     
 {% endblock %}
