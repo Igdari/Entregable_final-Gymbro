@@ -13,30 +13,29 @@
 
 {% block content %}
 
-    <h1><u>Listado de Profesores</u></h1>
+    <center><h1><u>Listado de Profesores</u></h1></center>
     <br>
     <br>
     <form action="/trainers/add-trainer/">
-        <input type="submit" value="Agregar Profesores" />
+        <input id="button" class="btn btn-success" type="submit" value="Agregar Profesores" />
     </form>
     <br>
-    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
-    -->{% for trainer in trainers %}
-
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de profesor" class="card-img-top" height="200">
-            <div class="card-body">
-            <h5 class="card-title">{{trainer.name}} {{trainer.last_name}}</h5>
-            {% if trainer.free == True %}
-                <p>Este profesor esta libre para dar clases</p>
-            {% else %}
-                <p>Actualmente, este profesor esta dando clases</p>
-            {% endif %}
-            <a href="/trainers/update-trainer/{{trainer.pk}}/" class="btn btn-primary">Actualizar</a>
-            <a href="/trainers/delete-trainer/{{trainer.pk}}/" class="btn btn-danger">Borrar</a>
+    {% for trainer in trainers %}
+        <center>
+            <div class="card" style="width: 10rem; float: left;">
+                <img src="https://www.pngkey.com/png/full/833-8337681_personal-trainer-icon.png" alt="imagen de profesor" class="card-img-top" height="130">
+                <div class="card-body">
+                <h5 class="card-title">{{trainer.name}} {{trainer.last_name}}</h5>
+                {% if trainer.free == True %}
+                    <p>Este profesor esta libre para dar clases</p>
+                {% else %}
+                    <p>Actualmente, este profesor esta dando clases</p>
+                {% endif %}
+                <a href="/trainers/update-trainer/{{trainer.pk}}/" id="button" class="btn btn-primary"">Detalle</a>
+                <a href="/trainers/delete-trainer/{{trainer.pk}}/" id="button" class="btn btn-danger">Borrar</a>
+                </div>
             </div>
-        </div>
+        </center>
     {% endfor %}
 
 {% endblock %}

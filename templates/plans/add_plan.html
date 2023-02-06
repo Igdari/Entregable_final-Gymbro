@@ -6,33 +6,34 @@
 
 {% block content %}
     <title>Agregar Nuevo Plan</title>
-    <h1><center>Bienvenido</center></h1>
-    <h3>Por favor ingrese los datos para agregar un nuevo plan al sistema</h3>
+    <center><h3>Por favor ingrese los datos para agregar un nuevo plan al sistema</h3></center>
+    <br>
+    <br>
+    <center>
+        {% if form %}
 
-    {% if form %}
+            <form action="" method="POST">
 
-        <form action="" method="POST">
+                {% csrf_token %}
 
-            {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
 
-            <table>
-                {{form.as_table}}
-            </table>
-
-
-            <input type="submit" value="Añadir Plan" class="btn-info">
-        </form>
-    {% endif %}
-
-
-    {% if form_errors %}
-        <h2 style="color: red;" >Errores:</h2>
-        {{form_errors}}
-    {% endif %}
+                <br>
+                <input type="submit" value="Añadir Plan" id="button" class="btn btn-success">
+            </form>
+        {% endif %}
 
 
-    {% if message %}
-        <h2 style="color: green;" >{{message}}</h2>
-    {% endif %}
+        {% if form_errors %}
+            <h2 style="color: red;" >Errores:</h2>
+            {{form_errors}}
+        {% endif %}
 
+
+        {% if message %}
+            <h2 style="color: green;" >{{message}}</h2>
+        {% endif %}
+    </center>
 {% endblock %}

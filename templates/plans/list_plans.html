@@ -5,7 +5,7 @@
     <input class="form-control mr-sm-2" type="search" placeholder="Buscar Planes" aria-label="Search" name="search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
-{% endblock %}
+{% endblock %} 
 
 {% block title %}
     Listado de Planes
@@ -13,35 +13,35 @@
 
 {% block content %}
 
-    <h1><u>Listado de Planes</u></h1>
+    <center><h1><u>Listado de Planes</u></h1></center>
     <br>
     <br>
     <form action="/plans/add-plan/">
-        <input type="submit" value="Agregar Planes" />
+        <input id="button" class="btn btn-success" type="submit" value="Agregar Planes" />
     </form>
     <br>
-    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
-    -->{% for plan in plans %}
-
-        <div class="card" style="width: 10rem; float: left;">
-            {% if 'Funcional' in plan.name %}
-                <img src="https://previews.123rf.com/images/pressmaster/pressmaster1706/pressmaster170601839/80881349-relax-after-training.jpg" alt="imagen de planes" class="card-img-top" height="130">
-            {% elif 'Spinning' in plan.name%}
-                <img src="https://guiafitness.com/wp-content/uploads/7-errores-que-debes-evitar-en-las-clases-de-spinning.jpg" alt="imagen de Spinning" class="card-img-top" height="130">
-            {% elif 'Crossfit' in plan.name %}
-                <img src="https://phantom-marca.unidadeditorial.es/c9a1c5973dcdb72e682282d7b99e4774/resize/660/f/webp/assets/multimedia/imagenes/2021/09/08/16310868187831.jpg" alt="imagen de Crossfit" class="card-img-top" height="130">
-            {% elif 'Arte' in plan.name%}
-                <img src="https://www.verywellfit.com/thmb/PaRaYkFejHiwJCQBIXIQTmu53nk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-928806608-8d2051ae01774c4281400c140a097305.jpg" alt="imagen de Arte-Marcial" class="card-img-top" height="130">
-            {% endif%}
-            <div class="card-body">
-            <h5 class="card-title">{{plan.name}}</h5>
-            <p class="card-text">${{plan.cost}}</p>
-            {% if request.user.is_authenticated %}
-                <a href="/plans/update-plan/{{plan.pk}}/" class="btn btn-primary">Actualizar</a>
-                <a href="/plans/delete-plan/{{plan.pk}}/" class="btn btn-danger">Borrar</a>
-            {% endif %}
+    {% for plan in plans %}
+        <center>
+            <div class="card" style="width: 10rem; float: left;">
+                {% if 'Funcional' in plan.name %}
+                    <img src="https://previews.123rf.com/images/pressmaster/pressmaster1706/pressmaster170601839/80881349-relax-after-training.jpg" alt="imagen de planes" class="card-img-top" height="130">
+                {% elif 'Spinning' in plan.name%}
+                    <img src="https://guiafitness.com/wp-content/uploads/7-errores-que-debes-evitar-en-las-clases-de-spinning.jpg" alt="imagen de Spinning" class="card-img-top" height="130">
+                {% elif 'Crossfit' in plan.name %}
+                    <img src="https://phantom-marca.unidadeditorial.es/c9a1c5973dcdb72e682282d7b99e4774/resize/660/f/webp/assets/multimedia/imagenes/2021/09/08/16310868187831.jpg" alt="imagen de Crossfit" class="card-img-top" height="130">
+                {% elif 'Arte' in plan.name%}
+                    <img src="https://www.verywellfit.com/thmb/PaRaYkFejHiwJCQBIXIQTmu53nk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-928806608-8d2051ae01774c4281400c140a097305.jpg" alt="imagen de Arte-Marcial" class="card-img-top" height="130">
+                {% endif%}
+                <div class="card-body">
+                <h5 class="card-title">{{plan.name}}</h5>
+                <p class="card-text">${{plan.cost}}</p>
+                {% if request.user.is_authenticated %}
+                    <a href="/plans/update-plan/{{plan.pk}}/" id="button" class="btn btn-primary">Detalle</a>
+                    <a href="/plans/delete-plan/{{plan.pk}}/" id="button" class="btn btn-danger">Borrar</a>
+                {% endif %}
+                </div>
             </div>
-        </div>
+        </center>
     {% endfor %}
 
 {% endblock %}

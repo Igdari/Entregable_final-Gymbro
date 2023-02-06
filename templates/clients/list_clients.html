@@ -13,26 +13,25 @@
 
 {% block content %}
 
-    <h1><u>Listado de Clientes</u></h1>
+    <center><h1><u>Listado de Clientes</u></h1></center>
     <br>
     <br>
     <form action="/clients/add-client">
-        <input type="submit" value="Agregar Cliente" />
+        <input id="button" class="btn btn-success" type="submit" value="Agregar Cliente" />
     </form>
     <br>
-    <!--<h2>Crear nuevo producto </h2> <a href="/products/create-product/" class="btn btn-primary">Crear</a>
-    -->{% for client in clients %}
-
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://cdn-icons-png.flaticon.com/512/55/55314.png" class="card-img-top" alt="imagen de cliente" height="200">
-            <div class="card-body">
-            <h5 class="card-title">{{client.first_name}} {{client.last_name}}</h5>
-            <p class="card-text">Fecha de Nacimiento: <b>{{client.birth_date}}</b></p>
-            <a href="/clients/update-client/{{client.pk}}/" class="btn btn-primary">Actualizar</a>
-            <a href="/clients/delete-client/{{client.pk}}/" class="btn btn-danger">Borrar</a>
+    {% for client in clients %}
+        <center>
+            <div class="card" style="width: 10rem; float: left;">
+                <img src="https://static.vecteezy.com/system/resources/previews/005/129/844/original/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" class="card-img-top" alt="imagen de cliente" height="150">
+                <div class="card-body">
+                <h5 class="card-title">{{client.first_name}} {{client.last_name}}</h5>
+                <p class="card-text">Fecha de Nacimiento: <b>{{client.birth_date}}</b></p>
+                <a href="/clients/update-client/{{client.pk}}/" id="button" class="btn btn-primary">Detalle</a>
+                <a href="/clients/delete-client/{{client.pk}}/" id="button" class="btn btn-danger">Borrar</a>
+                </div>
             </div>
-        </div>
+        </center>
     {% endfor %}
 
 {% endblock %}
