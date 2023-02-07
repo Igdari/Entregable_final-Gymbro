@@ -27,6 +27,11 @@
                 <div class="card-body">
                 <h5 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h5>
                 <h5 class="card-title">Este Profesor/ra enseña:<b> {{trainer.teaches}}</b></h5>
+                {% if trainer.is_free == False %}
+                    <h5 class="card-title">Cupo de Clases lleno</b></h5>
+                {% else %}
+                    <h5 class="card-title">Cupo de Clases disponible</b></h5>
+                {% endif %}
                 <a href="/trainers/update-trainer/{{trainer.pk}}/" id="button" class="btn btn-primary"">Detalle</a>
                 <a href="/trainers/delete-trainer/{{trainer.pk}}/" id="button" class="btn btn-danger">Borrar</a>
                 </div>

@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    confirmacion de borrado
+    Confirmacion de borrado
 {% endblock %}
 
 {% block content %}
+    <center> 
+        <h2>Esta a punto de eliminar el Plan</h2>
+        <p>Seguro que desea eliminalo?</p>
+        
+        {% if form %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
+                <input id="button" type="submit" class="btn btn-danger" value="Borrar">
+                <a href="/plans/list-plans/" id="button" class="btn btn-secondary">Volver</a>
+            </form>
+        {% endif %}
 
-    <h2>Plan a borrar {{object.name}}</h2>
-    <p>Seguro que desea eliminarlo?</p>
+        {% if form_errors %}
+            <h2 style="color: red;" >Errores:</h2>
+            {{form_errors}}
+        {% endif %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Borrar">
-    </form>
-
-
+        {% if message %}
+            <h2 style="color: green;" >{{message}}</h2>
+        {% endif %}
+    </center>
 {% endblock %}

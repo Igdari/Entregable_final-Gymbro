@@ -43,7 +43,6 @@ def list_plans(request):
     }
     return render(request, 'plans/list_plans.html', context=context)
 
-
 @login_required
 def update_plan(request, pk):
     plan = Plans.objects.get(id=pk)
@@ -77,10 +76,31 @@ def update_plan(request, pk):
             }
         return render(request, 'plans/update_plan.html', context=context)
 
-# class ProviderUpdateView(UpdateView)
-# def provider_delete(request, pk):     //provider.delete()
+@login_required
+def delete_plan(request, pk):
+    plan = Plans.objects.get(id=pk)
+    if request.method == 'GET':
+        form = PlanForm(initial = {
+            'name':plan.name,
+            'detail':plan.detail,
+            'cost':plan.cost,
+        })
+        context ={
+            'form':form
+        }
+        return render(request, 'plans/delete_plan.html', context=context)
 
-class PlanDeleteView(DeleteView):
-    model = Plans
-    template_name = 'plans/delete_plan.html'
-    success_url = '/plans/list-plan/'
+    elif request.method == 'POST':
+        form = PlanForm(request.POST)
+        if form.is_valid():
+            plan = Plans.objects.get(id=pk)
+            plan.delete()
+            context = {
+                'message': 'Plan borrado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': PlanForm()
+            }
+        return render(request, 'plans/delete_plan.html', context=context)

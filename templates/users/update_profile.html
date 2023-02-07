@@ -1,36 +1,30 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Actualizacion de perfil de usuario
+    Actualizacion de usuario
 {% endblock %}
 
 {% block content %}
-    <h1>Cambio de datos</h1>
+    <h1>Cambio de datos de Perfil</h1>
     {% if form %}
-
-        <form action="" method="POST" enctype="multipart/form-data" >
-
-            {% csrf_token %}
-
-            {% if request.user.is_authenticated %}
-                <div><u>
-                    Usuario: <b>{{user.username}}</b><br>
-                    Nombre: <b>{{user.first_name}}</b><br>
-                    Apellido: <b>{{user.last_name}}</b><br>
-                </u></div>
-            {% endif %}
+        <form action="" method="POST">
             
+            {% csrf_token %}
             <table>
                 {{form.as_table}}
             </table>
-
-
-            <input type="submit" value="Actualizar">
+            <input id="button" type="submit" class="btn btn-primary" value="Actualizar">
+            <a href="/users/info-user/" id="button" class="btn btn-secondary">Volver</a>
         </form>
     {% endif %}
 
-    {% if errors %}
-        {{errors}}
+    {% if form_errors %}
+        <h2 style="color: red;" >Errores:</h2>
+        {{form_errors}}
+    {% endif %}
+
+    {% if message %}
+        <h2 style="color: green;" >{{message}}</h2>
     {% endif %}
 
 

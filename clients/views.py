@@ -91,7 +91,7 @@ def update_client(request, pk):
             client.save()
 
             context = {
-                'message': 'Proveedor actualizado exitosamente'
+                'message': 'Cliente actualizado exitosamente'
             }
         else:
             context = {
@@ -100,10 +100,34 @@ def update_client(request, pk):
             }
         return render(request, 'clients/update_client.html', context=context)
 
-# class ProviderUpdateView(UpdateView)
-# def provider_delete(request, pk):     //provider.delete()
+@login_required
+def delete_client(request, pk):
+    client = Clients.objects.get(id=pk)
+    if request.method == 'GET':
+        form = ClientForm(initial = {
+            'first_name':client.first_name,
+            'last_name':client.last_name,
+            'birth_date':client.birth_date,
+            'address':client.address,
+            'phone_number':client.phone_number,
+            'email':client.email,
+        })
+        context ={
+            'form':form
+        }
+        return render(request, 'clients/delete_client.html', context=context)
 
-class ClientDeleteView(DeleteView):
-    model = Clients
-    template_name = 'clients/delete_client.html'
-    success_url = '/clients/list-clients/'
+    elif request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            client = Clients.objects.get(id=pk)
+            client.delete()
+            context = {
+                'message': 'Cliente borrado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': ClientForm()
+            }
+        return render(request, 'clients/delete_client.html', context=context)

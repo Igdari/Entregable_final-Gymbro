@@ -24,7 +24,7 @@ class UserUpdateForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     phone = forms.CharField(max_length=20, label='Número de telefono')
     birth_date = forms.DateField(label='Fecha de Nacimiento')
-    profile_picture = forms.ImageField(label='Foto de Perfil')
+    profile_picture = forms.ImageField(required=False, label='Foto de Perfil')
     class Meta:
         model = UserProfile
         fields = ['phone', 'birth_date', 'profile_picture']

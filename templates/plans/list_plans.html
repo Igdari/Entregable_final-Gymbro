@@ -16,10 +16,12 @@
     <center><h1><u>Listado de Planes</u></h1></center>
     <br>
     <br>
-    <form action="/plans/add-plan/">
-        <input id="button" class="btn btn-success" type="submit" value="Agregar Planes" />
-    </form>
+    {% if request.user.is_authenticated %}
+        <form action="/plans/add-plan/">
+            <input id="button" class="btn btn-success" type="submit" value="Agregar Planes" />
+        </form>
     <br>
+    {% endif %}
     {% for plan in plans %}
         <center>
             <div class="card" style="width: 10rem; float: left;">

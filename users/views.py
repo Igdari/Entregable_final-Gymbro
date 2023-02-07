@@ -38,6 +38,18 @@ def login_view(request):
         return render(request, 'users/login.html', context=context)
 
 
+def info_user(request):
+    user = request.user
+    form = UserUpdateForm(initial={
+        'username':request.user.username,
+        'first_name':request.user.first_name,
+        'last_name':request.user.last_name
+    })
+    context ={
+        'form':form
+    }
+    return render(request, 'users/info_user.html', context=context)
+
 def register(request):
     if request.method == 'GET':
         form = RegisterForm()
@@ -66,7 +78,10 @@ def update_user(request):
         form = UserUpdateForm(initial = {
             'username':user.username,
             'first_name':user.first_name,
-            'last_name':user.last_name
+            'last_name':user.last_name,
+            'phone':request.user.profile.phone,
+            'birth_date':request.user.profile.birth_date,
+            'profile_picture':request.user.profile.profile_picture
         })
         context ={
             'form':form
@@ -80,14 +95,17 @@ def update_user(request):
             user.first_name = form.cleaned_data.get('first_name')
             user.last_name = form.cleaned_data.get('last_name')
             user.save()
-            return redirect('index')
-        
-        context = {
-            'errors':form.errors,
-            'form':RegisterForm()
-        }
+            context = {
+                'message': 'Usuario actualizado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': UserUpdateForm()
+            }
         return render(request, 'users/update_user.html', context=context)
-
+        
+@login_required
 def update_user_profile(request):
     user = request.user
     if request.method == 'GET':
@@ -108,13 +126,15 @@ def update_user_profile(request):
             user.profile.birth_date = form.cleaned_data.get('birth_date')
             user.profile.profile_picture = form.cleaned_data.get('profile_picture')
             user.profile.save()
-            return redirect('index')
-        
-        context = {
-            'errors':form.errors,
-            'form':UserProfileForm()
-        }
-        return render(request, 'users/register.html', context=context)
+            context = {
+                'message': 'Usuario actualizado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': UserUpdateForm()
+            }
+        return render(request, 'users/update_profile.html', context=context)
 
 def welcome_image(request):
     

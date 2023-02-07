@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.views.generic import DeleteView
 
 from trainers.models import Trainers
 from trainers.forms import TrainerForm
@@ -57,6 +56,7 @@ def update_trainer(request, pk):
             'phone_number':trainer.phone_number,
             'email':trainer.email,
             'teaches':trainer.teaches,
+            'is_free':trainer.is_free,
         })
         context ={
             'form':form
@@ -74,6 +74,7 @@ def update_trainer(request, pk):
             trainer.phone_number = my_form['phone_number']
             trainer.email = my_form['email']
             trainer.teaches = my_form['teaches']
+            trainer.is_free = my_form['is_free']
             trainer.save()
             context = {
                 'message': 'Profesor actualizado exitosamente'
@@ -85,7 +86,34 @@ def update_trainer(request, pk):
             }
         return render(request, 'trainers/update_trainer.html', context=context)
 
-class TrainerDeleteView(DeleteView):
-    model = Trainers
-    template_name = 'trainers/delete_trainer.html'
-    success_url = '/trainers/list-trainers/'
+@login_required
+def delete_trainer(request, pk):
+    trainer = Trainers.objects.get(id=pk)
+    if request.method == 'GET':
+        form = TrainerForm(initial = {
+            'first_name':trainer.first_name,
+            'last_name':trainer.last_name,
+            'phone_number':trainer.phone_number,
+            'email':trainer.email,
+            'teaches':trainer.teaches,
+            'is_free':trainer.is_free,
+        })
+        context ={
+            'form':form
+        }
+        return render(request, 'trainers/delete_trainer.html', context=context)
+
+    elif request.method == 'POST':
+        form = TrainerForm(request.POST)
+        if form.is_valid():
+            trainer = Trainers.objects.get(id=pk)
+            trainer.delete()
+            context = {
+                'message': 'Profersor/ra borrado exitosamente'
+            }
+        else:
+            context = {
+                'form_errors': form.errors,
+                'form': TrainerForm()
+            }
+        return render(request, 'trainers/delete_trainer.html', context=context)
